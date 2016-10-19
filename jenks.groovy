@@ -17,6 +17,7 @@ node('Linux'){
     catch(err){
       stage 'Send Email Notification'
         sh 'echo "There was an error"'
+        p err
         currentBuild.result = 'FAILURE'
     }
 
