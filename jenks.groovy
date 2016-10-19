@@ -11,7 +11,7 @@ node('Linux'){
         sh 'mvn verify sonar:sonar'
         
     stage name: 'Publish TestReport', concurrency: 1    
-        junit '.\\target\\surefire-reports\\*.xml'
+        junit '**\\target\\surefire-reports\\*.xml'
     }
 
     catch(err){
