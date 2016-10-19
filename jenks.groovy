@@ -1,4 +1,3 @@
-
 node('Linux'){
     try{
         def mvnHome = tool 'Maven333'
@@ -11,16 +10,28 @@ node('Linux'){
         extensions: [], submoduleCfg: [],
         userRemoteConfigs: [[credentialsId: 'aa1c8452-6c57-40d4-814e-99ae1b74d1a9', url: 'git@github.com:okram999/mavenquick.git']]])
 
+    stage name: 'Test & Publish', concurrency: 1
+     try{
+        sh 'mvn test -B'
+      }
+      catch(err){
+        sh 'echo "Test have a FAILURE"'
+        p err
+        currentBuild.result = 'FAILURE'
+      } finally {
+        junit '**\\target\\surefire-reports\\*.xml'
+      }
+
+
     stage name: 'Build & Test', concurrency: 1
         sh 'mvn verify cobertura:cobertura sonar:sonar'
 
-    stage name: 'Publish TestReport', concurrency: 1
-        junit '**\\target\\surefire-reports\\*.xml'
+
+  //  stage name: 'Publish TestReport', concurrency: 1
+      //  junit '**\\target\\surefire-reports\\*.xml'
 
     stage name: 'Deploy To Lab', concurrency: 1
         //Add code to Deploy to Lab env
-
-
 
     }
 
@@ -32,4 +43,3 @@ node('Linux'){
     }
 
 }
-
