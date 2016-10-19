@@ -16,7 +16,7 @@ node('Linux'){
       }
       catch(err){
         sh 'echo "Test have a FAILURE"'
-        p err
+        throw err
         currentBuild.result = 'FAILURE'
       } finally {
         junit '**\\target\\surefire-reports\\*.xml'
@@ -38,7 +38,7 @@ node('Linux'){
     catch(err){
       stage 'Send Email Notification'
         sh 'echo "There was an error"'
-        p err
+        throw err
         currentBuild.result = 'FAILURE'
     }
 
