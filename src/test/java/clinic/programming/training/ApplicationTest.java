@@ -22,7 +22,7 @@ public class ApplicationTest {
 
     @Test
     public void testWordCountEmpty() {
-        int count = app.countWords("");
+        int count = app.countWords("apple");
         assertTrue(count == 0);
     }
 
