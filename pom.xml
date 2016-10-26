@@ -22,8 +22,7 @@
 </dependency>
   </dependencies>
 
-
-	<build>
+<build>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -37,4 +36,11 @@
     </plugins>
   </build>
 
+	    <scm>
+		<connection>scm:git:git@github.com:okram999/mavenquick.git</connection>
+		<developerConnection>scm:git:git@github.com:okram999/mavenquick.git</developerConnection>
+		<url>scm:git:git@github.com:okram999/mavenquick.git</url>
+	</scm>
+	
+	
 </project>
