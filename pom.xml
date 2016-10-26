@@ -32,12 +32,24 @@
     </plugins>
   </build>
 
-	    <scm>
+          <scm>
 		<connection>scm:git:git@github.com:okram999/mavenquick.git</connection>
 		<developerConnection>scm:git:git@github.com:okram999/mavenquick.git</developerConnection>
 		<url>scm:git:git@github.com:okram999/mavenquick.git</url>
 	  <tag>HEAD</tag>
   </scm>
+	
+	
+      <distributionManagement>
+		<snapshotRepository>
+			<id>ny-snapshots</id>
+			<url>http://ec2-54-218-90-219.us-west-2.compute.amazonaws.com:8081/nexus/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>ny-releases</id>
+			<url>http://ec2-54-218-90-219.us-west-2.compute.amazonaws.com:8081/nexus/content/repositories/releases</url>
+		</repository>
+	</distributionManagement>
 	
 	
 </project>
