@@ -12,7 +12,7 @@ node('Linux'){
 
     stage name: 'Test & Publish', concurrency: 1
      try{
-        sh 'mvn test -B'
+        sh 'mvn clean deploy -B'
       }
       catch(err){
         sh 'echo "Test have a FAILURE"'
