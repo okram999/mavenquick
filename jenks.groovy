@@ -1,4 +1,4 @@
-node('Linux'){
+  node('Linux'){
     try{
         def mvnHome = tool 'Maven333'
         env.PATH = "${mvnHome}/bin:${env.PATH}"
@@ -11,22 +11,23 @@ node('Linux'){
         userRemoteConfigs: [[credentialsId: 'aa1c8452-6c57-40d4-814e-99ae1b74d1a9', url: 'git@github.com:okram999/mavenquick.git']]])
 
     stage name: 'Test & Publish', concurrency: 1
-     try{
-        sh 'mvn clean deploy -B'
-      }
-      catch(err){
-        sh 'echo "Test have a FAILURE"'
-        throw err
-        currentBuild.result = 'FAILURE'
-      } finally {
-        junit '**\\target\\surefire-reports\\*.xml'
-      }
-
-
-    stage name: 'Code_Scan', concurrency: 1
-    withSonarQubeEnv {
-        sh 'mvn verify cobertura:cobertura sonar:sonar' //-Dsonar.login=jenkins -Dsonar.password=Letmein
-      }
+    parallel Test&Publish: {
+      try{
+         sh 'mvn test -B'
+       }
+       catch(err){
+         sh 'echo "Test have a FAILURE"'
+         throw err
+         currentBuild.result = 'FAILURE'
+       } finally {
+         junit '**\\target\\surefire-reports\\*.xml'
+       }
+    }, Code_Scan: {
+      withSonarQubeEnv {
+          sh 'mvn verify cobertura:cobertura sonar:sonar' //-Dsonar.login=jenkins -Dsonar.password=Letmein
+        }
+    },
+      failFast: true
 
     stage name: 'Deploy To Lab', concurrency: 1
 
