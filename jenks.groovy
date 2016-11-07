@@ -24,7 +24,7 @@ node('Linux'){
 
 
     stage name: 'Build & Test', concurrency: 1
-        sh 'mvn verify cobertura:cobertura sonar:sonar'
+        //sh 'mvn verify cobertura:cobertura sonar:sonar'
 
 
   //  stage name: 'Publish TestReport', concurrency: 1
