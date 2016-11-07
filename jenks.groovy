@@ -24,7 +24,7 @@ node('Linux'){
 
 
     stage name: 'Code_Scan', concurrency: 1
-        sh 'mvn verify cobertura:cobertura sonar:sonar sonar-runner -Dsonar.login=ci-user -Dsonar.password=ci-user'
+        sh 'mvn verify cobertura:cobertura sonar:sonar sonar-runner -Dsonar.login=jenkins -Dsonar.password=Letmein'
 
 
     stage name: 'Deploy To Lab', concurrency: 1
