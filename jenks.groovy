@@ -23,15 +23,12 @@ node('Linux'){
       }
 
 
-    stage name: 'Build & Test', concurrency: 1
-        //sh 'mvn verify cobertura:cobertura sonar:sonar'
+    stage name: 'Code_Scan', concurrency: 1
+        sh 'mvn verify cobertura:cobertura sonar:sonar'
 
-
-  //  stage name: 'Publish TestReport', concurrency: 1
-      //  junit '**\\target\\surefire-reports\\*.xml'
 
     stage name: 'Deploy To Lab', concurrency: 1
-        //Add code to Deploy to Lab env
+
 
     }
 
